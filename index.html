@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Srithong WhatsApp</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;800&display=swap">
+<style>
+/* layout: one centered card, sea gradient, a single dominant action */
+:root{--bg:#eaf6f8;--fg:#0b2a33;--muted:#4f6b73;--card:#ffffff;--accent:#25d366;--accent-fg:#063b1e;--line:#cfe3e8}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#07191f;--fg:#e8f4f7;--muted:#9bb6bd;--card:#0f2a33;--accent:#25d366;--accent-fg:#063b1e;--line:#1f3e48;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#07191f;--fg:#e8f4f7;--muted:#9bb6bd;--card:#0f2a33;--accent:#25d366;--accent-fg:#063b1e;--line:#1f3e48;color-scheme:dark}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Heebo,"Segoe UI",Arial,sans-serif;direction:rtl;display:flex;align-items:center;justify-content:center;padding-block:24px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));box-sizing:border-box}
+.card{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:32px 24px;max-width:420px;width:100%;text-align:center;display:flex;flex-direction:column;gap:18px;box-shadow:0 20px 50px rgba(0,40,60,.12)}
+.logo{font-size:44px;line-height:1}
+h1{margin:0;font-size:26px;font-weight:800;text-wrap:balance}
+p{margin:0;color:var(--muted);font-size:16px;line-height:1.5}
+.btn{display:block;background:var(--accent);color:var(--accent-fg);text-decoration:none;font-weight:800;font-size:22px;padding:18px 20px;border-radius:999px;border:0;cursor:pointer;width:100%;box-sizing:border-box}
+.btn:focus-visible{outline:3px solid var(--fg);outline-offset:3px}
+.num{font-size:22px;font-weight:500;letter-spacing:.5px;font-variant-numeric:tabular-nums;direction:ltr;user-select:all}
+.copy{background:transparent;border:1px solid var(--line);color:var(--fg);border-radius:999px;padding:10px 16px;font:inherit;font-size:15px;cursor:pointer}
+.small{font-size:13px}
+#done{color:var(--accent-fg);background:var(--accent);display:inline-block;padding:4px 12px;border-radius:999px;font-size:13px}
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="logo">🚤</div>
+  <h1>ספארי ג'ט-סקי בקוסמוי</h1>
+  <p>אי החזירים · שנורקלינג · הסעה מהמלון<br>המדריך מצלם אתכם ושולח בוואטסאפ</p>
+  <a id="go" class="btn" href="https://wa.me/66620123091?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%A1%D7%A4%D7%90%D7%A8%D7%99%20%D7%92%27%D7%98-%D7%A1%D7%A7%D7%99">דברו איתנו בוואטסאפ 💬</a>
+  <div class="num">+66 62 012 3091</div>
+  <div><button id="copy" class="copy" type="button">העתקת המספר</button> <span id="done" hidden>הועתק ✓</span></div>
+  <p class="small">לא נפתח? לחצו על ••• למעלה ← "פתיחה ב-Safari"</p>
+</main>
+<script>
+(function(){
+  var msg='היי, אשמח לפרטים על ספארי ג\'ט-סקי';
+  var wa='https://wa.me/66620123091?text='+encodeURIComponent(msg);
+  var ios=/iPhone|iPad|iPod/i.test(navigator.userAgent);
+  var inApp=/TikTok|Instagram|FBAN|FBAV|musical_ly|Bytedance/i.test(navigator.userAgent);
+  var go=document.getElementById('go');
+  if(ios&&inApp){ go.href='x-safari-'+wa; }
+  else if(!ios){ go.href='intent://send?phone=66620123091&text='+encodeURIComponent(msg)+'#Intent;scheme=whatsapp;package=com.whatsapp;S.browser_fallback_url='+encodeURIComponent(wa)+';end'; }
+  var c=document.getElementById('copy'),d=document.getElementById('done');
+  c.addEventListener('click',function(){
+    var n='+66620123091';
+    function ok(){d.hidden=false;setTimeout(function(){d.hidden=true},2000)}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(n).then(ok,function(){sel();ok()})}else{sel();ok()}
+    function sel(){var r=document.createRange();r.selectNodeContents(document.querySelector('.num'));var s=getSelection();s.removeAllRanges();s.addRange(r)}
+  });
+})();
+</script>
+</body>
+</html>
