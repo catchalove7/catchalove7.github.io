@@ -21,12 +21,15 @@ p{margin:0;color:var(--muted);font-size:16px;line-height:1.5}
 .num{font-size:22px;font-weight:500;letter-spacing:.5px;font-variant-numeric:tabular-nums;direction:ltr;user-select:all}
 .copy{background:transparent;border:1px solid var(--line);color:var(--fg);border-radius:999px;padding:10px 16px;font:inherit;font-size:15px;cursor:pointer}
 .small{font-size:13px}
+.tip{background:#fff3cd;color:#5a3d00;border-radius:16px;padding:14px;font-size:16px;line-height:1.5;font-weight:500}
+.tip[hidden]{display:none}
 #done[hidden]{display:none}
 #done{color:var(--accent-fg);background:var(--accent);display:inline-block;padding:4px 12px;border-radius:999px;font-size:13px}
 </style>
 </head>
 <body>
 <main class="card">
+  <div id="tt" class="tip" hidden>📱 בטיקטוק באייפון: לחצו על <b>•••</b> למעלה ← <b>"פתיחה ב-Safari"</b>, ואז על הכפתור הירוק</div>
   <div class="logo">🚤</div>
   <h1>ספארי ג'ט-סקי בקוסמוי</h1>
   <p>אי החזירים · שנורקלינג · הסעה מהמלון<br>המדריך מצלם אתכם ושולח בוואטסאפ</p>
@@ -42,6 +45,7 @@ p{margin:0;color:var(--muted);font-size:16px;line-height:1.5}
   var ios=/iPhone|iPad|iPod/i.test(navigator.userAgent);
   var inApp=/TikTok|Instagram|FBAN|FBAV|musical_ly|Bytedance/i.test(navigator.userAgent);
   var go=document.getElementById('go');
+  if(ios&&/TikTok|musical_ly|Bytedance/i.test(navigator.userAgent)){ document.getElementById('tt').hidden=false; }
   if(ios&&inApp){ go.href='x-safari-'+wa; }
   else if(!ios){ go.href='intent://send?phone=66620123091&text='+encodeURIComponent(msg)+'#Intent;scheme=whatsapp;package=com.whatsapp;S.browser_fallback_url='+encodeURIComponent(wa)+';end'; }
   var c=document.getElementById('copy'),d=document.getElementById('done');
